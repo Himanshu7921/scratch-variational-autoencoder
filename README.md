@@ -7,3 +7,5 @@
 
 
 ### I am referring to the paper [“Auto-Encoding Variational Bayes”](https://arxiv.org/pdf/1312.6114)
+
+### After this: I'll Implement this Paper from Scratch
