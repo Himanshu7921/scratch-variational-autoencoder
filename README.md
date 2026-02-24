@@ -6,6 +6,8 @@
 5. Role and computation of the KL-Divergence term
 
 
-### I am referring to the paper [“Auto-Encoding Variational Bayes”](https://arxiv.org/pdf/1312.6114)
+### I am referring to the papers
+1. [“An Introduction to Variational Autoencoders”](https://arxiv.org/pdf/1906.02691)
+1. [“Auto-Encoding Variational Bayes”](https://arxiv.org/pdf/1312.6114)
 
 ### After this: I'll Implement this Paper from Scratch
