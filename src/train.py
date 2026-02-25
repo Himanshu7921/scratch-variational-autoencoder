@@ -16,43 +16,40 @@ training_labels_filepath = join(config.input_path, 'train-labels-idx1-ubyte/trai
 test_images_filepath = join(config.input_path, 't10k-images-idx3-ubyte/t10k-images-idx3-ubyte')
 test_labels_filepath = join(config.input_path, 't10k-labels-idx1-ubyte/t10k-labels-idx1-ubyte')
 
-def train_vae(model, x_train, optimizer, epochs=10, batch_size=128, device="cpu"):
-
+def train_vae(model, x_train, optimizer, epochs=10, batch_size=128, device="cpu", anneal_epochs=20):
     model.train()
-    latent_dim = model.latent_dim
     model.to(device)
 
-    # Create DataLoader
     dataset = TensorDataset(x_train)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
     for epoch in range(1, epochs + 1):
+        beta = min(1.0, epoch / anneal_epochs)
+        
         loop = tqdm(dataloader, leave=True)
-
         for batch in loop:
             x = batch[0].to(device)
 
-            # forward pass
             x_tilde, mu, log_var = model(x)
 
-            # losses
             recon_loss = F.binary_cross_entropy(x_tilde, x, reduction="mean")
-            kl_loss = kl_divergence(mu, log_var) / x.size(0)   # normalize per batch
-            kl_loss = kl_loss / (batch_size * latent_dim)
-            loss = recon_loss + kl_loss
+            
+            kl_val = kl_divergence(mu, log_var)
+            kl_loss = torch.mean(kl_val)
 
-            # backward
+            loss = recon_loss + (beta * kl_loss * 0.01)
+
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
 
-            # tqdm status bar
-            loop.set_description(f"Epoch {epoch}/{epochs}")
-            loop.set_postfix(
-                loss=float(loss),
-                recon=float(recon_loss),
-                kl=float(kl_loss)
-            )
+            if epoch % 1 == 0:
+                loop.set_description(f"Epoch {epoch}/{epochs} [beta={beta:.2f}]")
+                loop.set_postfix(
+                    loss=float(loss),
+                    recon=float(recon_loss),
+                    kl=float(kl_loss)
+                )
 
     print("Training complete.")
 
