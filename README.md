@@ -66,7 +66,6 @@ scratch-variational-autoencoder/
 │   └── samples.png
 ├── notebooks/
 │   ├── vae.ipynb
-│   └── mnist_reader.ipynb
 ├── requirements.txt
 └── src/
     ├── __init__.py
