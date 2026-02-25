@@ -231,13 +231,13 @@ Epoch 200, Recon Loss: xx, KL: xx, Total: xx
 
 ### **Reconstruction Example**
 
-![Image](./docs/regenerated_images.png)
+![Image](./docs/regenerated_images_2.png)
 
 
 ---
 
 ### **Generated Samples**
-![Image](./docs/sample.jpeg)
+![Image](./docs/sample_2.png)
 
 ---
 
