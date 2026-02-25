@@ -10,4 +10,26 @@
 1. [“An Introduction to Variational Autoencoders”](https://arxiv.org/pdf/1906.02691)
 1. [“Auto-Encoding Variational Bayes”](https://arxiv.org/pdf/1312.6114)
 
-### After this: I'll Implement this Paper from Scratch
+
+### **Next Step**
+
+I will fully implement the paper’s complete model from the ground up.
+
+---
+
+## **Completed**
+
+* Designed the architecture from first principles
+* Implemented the full architecture from scratch
+* Trained the model end-to-end
+* Performed optimization and tuning
+* Documented thorough mathematical derivations and notes in my notebook
+
+---
+
+## **Pending**
+
+* Build the full training pipeline
+* Build the inference pipeline
+* Implement the reconstruction workflow
+* Implement the image generation workflow
