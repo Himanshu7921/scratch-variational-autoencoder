@@ -2,4 +2,3 @@ data/
 src/__pycache__/
 saved_weights/
 vae_weights.pth
-docs/
