@@ -60,7 +60,7 @@ def visualize_reconstructed_images(model_output: torch.tensor, x_test: torch.ten
         originals,
         recons,
         labels,
-        save_path="mnist_reconstructions.png"
+        save_path="regenerated_images.png"
     )
 
 
