@@ -71,4 +71,4 @@ if __name__ == "__main__":
 
     mnsit_vae.load_state_dict(torch.load("vae_weights.pth", weights_only = True))
     mnsit_vae.eval()
-    generate_new_images(mnsit_vae, n_images = 16)
+    generate_new_images(mnsit_vae, n_images = 300)
