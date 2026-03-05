@@ -3,7 +3,10 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>VAE Digit Generator</title>
 
 <style>
@@ -14,7 +17,7 @@ body{
     color:white;
     text-align:center;
     margin:0;
-    padding:40px;
+    padding:40px 20px;
 }
 
 h1{
@@ -42,28 +45,30 @@ button:hover{
     background:#2563eb;
 }
 
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:0 15px;
+}
+
+/* ---------- DIGIT GALLERY ---------- */
+
 #gallery{
     margin-top:40px;
     display:grid;
-    grid-template-columns:repeat(10,70px);
+    grid-template-columns:repeat(auto-fit, minmax(60px,1fr));
     justify-content:center;
     gap:12px;
 }
 
 #gallery img{
-    width:70px;
+    width:100%;
+    max-width:70px;
     background:black;
     border-radius:4px;
 }
 
-.container{
-    max-width:900px;
-    margin:auto;
-}
-
-.vae-demo h2{
-    margin-bottom:20px;
-}
+/* ---------- VAE EXPLANATION SECTION ---------- */
 
 .vae-demo{
     margin-top:80px;
@@ -71,9 +76,16 @@ button:hover{
     border-top:1px solid #1e293b;
 }
 
+.vae-demo h2{
+    margin-bottom:20px;
+}
+
+/* ---------- CAROUSEL ---------- */
+
 .carousel-container{
     position:relative;
-    width:650px;
+    width:100%;
+    max-width:1000px;
     margin:auto;
 }
 
@@ -86,12 +98,17 @@ button:hover{
 .carousel-track{
     display:flex;
     transition:transform 0.5s ease;
+    image-rendering: crisp-edges;
 }
 
 .carousel-track img{
-    width:650px;
+    width:100%;
+    max-width:900px;
+    height:auto;
     flex-shrink:0;
 }
+
+/* ---------- NAVIGATION ARROWS ---------- */
 
 .nav{
     position:absolute;
@@ -106,6 +123,8 @@ button:hover{
 
 .prev{ left:-50px }
 .next{ right:-50px }
+
+/* ---------- DOTS ---------- */
 
 .dots{
     margin-top:15px;
@@ -124,6 +143,8 @@ button:hover{
     background:#22c55e;
 }
 
+/* ---------- CAPTION ---------- */
+
 .caption{
     margin-top:15px;
     color:#22c55e;
@@ -131,6 +152,24 @@ button:hover{
     max-width:600px;
     margin-left:auto;
     margin-right:auto;
+}
+
+/* ---------- MOBILE OPTIMIZATION ---------- */
+
+@media (max-width:600px){
+
+    h1{
+        font-size:30px;
+    }
+
+    button{
+        font-size:14px;
+        padding:10px 20px;
+    }
+
+    .prev{ left:10px }
+    .next{ right:10px }
+
 }
 
 </style>
@@ -151,24 +190,25 @@ Click the button to generate new handwritten digits from the model's latent spac
 <button onclick="generateImage()">Generate Digits</button>
 
 <div id="gallery"></div>
+
 <section class="vae-demo">
 
-<h2>How the VAE Works</h2>
+<h2>How VAEs Work Mathematically</h2>
 
 <div class="carousel-container">
-    
+
 <button class="nav prev">❮</button>
-    
+
 <div class="carousel">
-    <div class="carousel-track">
-        
-        <img src="/static/notes/note1.png">
-        <img src="/static/notes/note2.png">
-        <img src="/static/notes/note3.png">
-        <img src="/static/notes/note4.png">
-        <img src="/static/notes/note5.png">
-        
-    </div>
+
+<div class="carousel-track">
+
+<img src="/static/notes/note1.png">
+<img src="/static/notes/note2.png">
+<img src="/static/notes/note3.png">
+
+</div>
+
 </div>
 
 <button class="nav next">❯</button>
@@ -181,10 +221,10 @@ Click the button to generate new handwritten digits from the model's latent spac
 
 </section>
 
-
 </div>
 
 <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </body>
 </html>
