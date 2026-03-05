@@ -1,9 +1,7 @@
 numpy
-torch
+torch --index-url https://download.pytorch.org/whl/cpu
 matplotlib
 tqdm
 flask
-torch
-numpy
 pillow
 gunicorn
