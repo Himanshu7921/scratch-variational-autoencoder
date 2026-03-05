@@ -18,6 +18,33 @@ body{
     text-align:center;
     margin:0;
     padding:40px 20px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.particle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    animation: float 20s infinite;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
 }
 
 h1{
@@ -63,10 +90,6 @@ button{
     transition:0.2s;
 }
 
-button:hover{
-    background:#2563eb;
-}
-
 .container{
     max-width:900px;
     margin:auto;
@@ -74,20 +97,30 @@ button:hover{
 }
 
 /* ---------- DIGIT GALLERY ---------- */
-
-#gallery{
-    margin-top:40px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(60px,1fr));
-    justify-content:center;
-    gap:12px;
+#gallery {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 16px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#gallery img{
-    width:100%;
-    max-width:70px;
-    background:black;
-    border-radius:4px;
+#gallery img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #1e293b;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#gallery img:hover {
+    transform: scale(1.1);
+    border-color: #3b82f6;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
 /* ---------- VAE EXPLANATION SECTION ---------- */
