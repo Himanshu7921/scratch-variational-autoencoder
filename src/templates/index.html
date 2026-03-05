@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>VAE Digit Generator</title>
+
+<style>
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    margin:0;
+    padding:40px;
+}
+
+h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+p{
+    color:#cbd5e1;
+    margin-bottom:30px;
+}
+
+button{
+    padding:12px 28px;
+    font-size:16px;
+    border:none;
+    border-radius:8px;
+    background:#3b82f6;
+    color:white;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    background:#2563eb;
+}
+
+#gallery{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(10,70px);
+    justify-content:center;
+    gap:12px;
+}
+
+#gallery img{
+    width:70px;
+    background:black;
+    border-radius:4px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.vae-demo h2{
+    margin-bottom:20px;
+}
+
+.vae-demo{
+    margin-top:80px;
+    padding-top:40px;
+    border-top:1px solid #1e293b;
+}
+
+.carousel-container{
+    position:relative;
+    width:650px;
+    margin:auto;
+}
+
+.carousel{
+    overflow:hidden;
+    border-radius:18px;
+    border:2px solid #22c55e;
+}
+
+.carousel-track{
+    display:flex;
+    transition:transform 0.5s ease;
+}
+
+.carousel-track img{
+    width:650px;
+    flex-shrink:0;
+}
+
+.nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:none;
+    border:none;
+    color:#22c55e;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.prev{ left:-50px }
+.next{ right:-50px }
+
+.dots{
+    margin-top:15px;
+}
+
+.dots span{
+    height:8px;
+    width:8px;
+    margin:5px;
+    display:inline-block;
+    border-radius:50%;
+    background:#22c55e55;
+}
+
+.dots span.active{
+    background:#22c55e;
+}
+
+.caption{
+    margin-top:15px;
+    color:#22c55e;
+    font-size:16px;
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>MNIST Digit Generator</h1>
+
+<p>
+This demo uses a Variational AutoEncoder trained on the MNIST dataset.
+Click the button to generate new handwritten digits from the model's latent space.
+</p>
+
+<button onclick="generateImage()">Generate Digits</button>
+
+<div id="gallery"></div>
+<section class="vae-demo">
+
+<h2>How the VAE Works</h2>
+
+<div class="carousel-container">
+    
+<button class="nav prev">❮</button>
+    
+<div class="carousel">
+    <div class="carousel-track">
+        
+        <img src="/static/notes/note1.png">
+        <img src="/static/notes/note2.png">
+        <img src="/static/notes/note3.png">
+        <img src="/static/notes/note4.png">
+        <img src="/static/notes/note5.png">
+        
+    </div>
+</div>
+
+<button class="nav next">❯</button>
+
+</div>
+
+<div class="caption" id="caption"></div>
+
+<div class="dots"></div>
+
+</section>
+
+
+</div>
+
+<script defer src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
