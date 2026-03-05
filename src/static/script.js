@@ -84,11 +84,10 @@ captions.push(
 "Closed-form KL Divergence for Gaussian Latent Variables."
 );
 
-captionElement.innerText = captions[0]
-// captionElement.innerHTML = captions[index];
+captionElement.innerHTML = captions[0]
 
 if (window.MathJax) {
-    MathJax.typesetPromise();
+    MathJax.typesetPromise([captionElement]);
 }
 
 // --------------------
@@ -124,8 +123,12 @@ captionElement.style.opacity = 0
 
 setTimeout(()=>{
 
-    captionElement.innerText = captions[index]
+    captionElement.innerHTML = captions[index]
     captionElement.style.opacity = 1
+    
+    if (window.MathJax) {
+        MathJax.typesetPromise([captionElement]);
+    }
 
 },150)
 
@@ -160,4 +163,37 @@ document.addEventListener("keydown", e => {
 if(e.key === "ArrowRight") nextBtn.onclick()
 if(e.key === "ArrowLeft") prevBtn.onclick()
 
-})}
+})
+
+// --------------------
+// Carousel Lightbox
+// --------------------
+
+const carouselModal = document.getElementById("carouselModal")
+const carouselModalImg = document.getElementById("carouselModalImage")
+const carouselCloseBtn = carouselModal.querySelector(".close-modal")
+
+slides.forEach(img => {
+    img.style.cursor = "pointer"
+    img.onclick = () => {
+        carouselModal.style.display = "flex"
+        carouselModalImg.src = img.src
+    }
+})
+
+carouselCloseBtn.onclick = () => {
+    carouselModal.style.display = "none"
+}
+
+carouselModal.onclick = (e) => {
+    if(e.target === carouselModal){
+        carouselModal.style.display = "none"
+    }
+}
+
+document.addEventListener("keydown", e => {
+    if(e.key === "Escape"){
+        carouselModal.style.display = "none"
+    }
+})
+}
