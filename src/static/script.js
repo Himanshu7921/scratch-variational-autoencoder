@@ -10,7 +10,6 @@ const gallery = document.getElementById("gallery")
 const button = document.querySelector("button")
 
 gallery.innerHTML = ""
-button.innerText = "Generating..."
 
 for(let i = 0; i < 30; i++){
 
@@ -20,8 +19,37 @@ for(let i = 0; i < 30; i++){
     const img = document.createElement("img")
     img.src = "data:image/png;base64," + data.img
 
+    img.onclick = () => openImage(img.src)
+
     gallery.appendChild(img)
 }
+
+const modal = document.getElementById("imageModal")
+const modalImg = document.getElementById("modalImage")
+const closeBtn = document.querySelector(".close")
+
+function openImage(src){
+
+    modal.style.display = "flex"
+    modalImg.src = src
+
+}
+
+closeBtn.onclick = () => {
+    modal.style.display = "none"
+}
+
+modal.onclick = (e) => {
+    if(e.target === modal){
+        modal.style.display = "none"
+    }
+}
+
+document.addEventListener("keydown", e=>{
+    if(e.key === "Escape"){
+        modal.style.display = "none"
+    }
+})
 
 button.innerText = "Generate Digits"
 
@@ -43,15 +71,25 @@ const dotsContainer = document.querySelector(".dots")
 // Slide Captions
 // --------------------
 
-const captions = [
-"Encoder: The input image is compressed into a latent representation.",
-"Latent Space: The encoder outputs mean and variance vectors.",
-"Reparameterization Trick: Sampling is done using μ + σ * ε so gradients can flow.",
-"Decoder: The sampled latent vector is passed through the decoder network.",
-"Generated Images: The decoder reconstructs a new handwritten digit."
-]
+const captions = [];
+
+
+captions.push(
+    "From Intractable Posterior to ELBO: Introducing an approximate posterior \\( q_\\phi(z|x) \\) allows us to optimize a tractable lower bound on \\( \\log p_\\theta(x) \\)."
+);
+
+captions.push("Deriving the VAE Objective (ELBO): Reconstruction Loss + KL Divergence, with the Reparameterization Trick for Backpropagation.");
+
+captions.push(
+"Closed-form KL Divergence for Gaussian Latent Variables."
+);
 
 captionElement.innerText = captions[0]
+// captionElement.innerHTML = captions[index];
+
+if (window.MathJax) {
+    MathJax.typesetPromise();
+}
 
 // --------------------
 // Create Dots
@@ -76,7 +114,7 @@ const dots = dotsContainer.children
 // --------------------
 
 function updateSlide(){
-track.style.transform = `translateX(-${index * 650}px)`
+track.style.transform = `translateX(-${index * 100}%)`
 
 for(let d of dots) d.classList.remove("active")
 
